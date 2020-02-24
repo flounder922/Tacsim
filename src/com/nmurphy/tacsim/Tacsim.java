@@ -93,6 +93,9 @@ public class Tacsim {
                 break;
             }
 
+            if(PP >= 255){
+                System.out.println("Memory is at limit or has been exceeded.");
+            }
             ++cycles;
         }
     }
