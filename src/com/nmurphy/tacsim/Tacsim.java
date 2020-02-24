@@ -98,5 +98,14 @@ public class Tacsim {
             }
             ++cycles;
         }
+
+        // Do a Memory-Dump
+        for(int i = 0; i < memory_array.length; ++i) {
+            System.out.print(memory_array[i]);
+            if (i == 15 || i == 31 || i == 47 || i == 63 || i == 79 || i == 95 || i == 111 || i == 127 || i == 143 || i == 159
+            || i == 175 || i == 191 || i == 207 || i == 223 || i == 239 || i == 255){
+                System.out.println();
+            }
+        }
     }
 }
