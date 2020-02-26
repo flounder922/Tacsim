@@ -1,11 +1,13 @@
 package com.nmurphy.tacsim;
 
 import java.util.Arrays;
+import java.util.Scanner;
 import java.io.*;
 
-public class Tacsim {
-
-    public static void main(String[] args) {
+public class Tacsim
+{
+    public static void main(String[] args)
+    {
 
         // Declare memory/registers
         int[] memory_array = new int[256];
@@ -14,17 +16,22 @@ public class Tacsim {
         boolean SR = false; // flag
         int PP = 0; // Points to position in memory.
         // Initialize memory
-        Arrays.fill(memory_array, 0);
+        for (int i = 0; i < memory_array.length; ++i)
+        {
+            memory_array[i] = 0;
+        }
 
         // Read in the file
         try
         {
-            FileInputStream fr = new FileInputStream(new File(args[0]));
+            //System.out.println("Reading data into memory!!");
+            Scanner scanner = new Scanner(new File(args[0]));
             int i = 0;
-            int data;
-            while((data = fr.read()) != -1) {
-                memory_array[i] = data;
+            while (scanner.hasNextInt()) {
+                memory_array[i] = scanner.nextInt();
+                ++i;
             }
+            scanner.close();
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -35,11 +42,15 @@ public class Tacsim {
         {
             System.out.println("File not found!");
         }
+        //System.out.println("Finished reading data into memory!\n");
 
         // Reading and decoding information in memory
         int cycles = 0;
         while(cycles < 10000)
         {
+            //System.out.println("PP: " + PP);
+            if (PP >= 256)
+                break;
             if (memory_array[PP] == 0) {
                 PP++;
             } else if (memory_array[PP] == 1) {
@@ -89,32 +100,83 @@ public class Tacsim {
                     PP++;
                 }
             } else if (memory_array[PP] == 15) {
-                break;
+                PP++;
+                if(memory_array[PP] == 0)
+                    break;
             }
 
             if(PP >= 255){
                 System.out.println("Memory is at limit or has been exceeded.");
             }
             ++cycles;
+            PP++;
         }
 
         // Do a Memory-Dump
-        /*for(int i = 0; i < memory_array.length; ++i) {
-            System.out.print(memory_array[i]);
-            if (i == 15 || i == 31 || i == 47 || i == 63 || i == 79 || i == 95 || i == 111 || i == 127 || i == 143 || i == 159
-            || i == 175 || i == 191 || i == 207 || i == 223 || i == 239 || i == 255){
-                System.out.println();
-            }
-        }*/
-        int row = 0;
-        int j = 0;
         System.out.println("Memory Dump");
-        for(int i = 0; i < 16; ++i) {
-            j = 0;
-            for (; j < 16; ++j) {
-                System.out.print(memory_array[j + row]);
-            }
-            row += j + 1;
+        for (int i = 0; i < 16; ++i) {
+            System.out.print(memory_array[i] + "  ");
         }
+        System.out.println();
+        for (int i = 16; i < 32; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 32; i < 48; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 48; i < 64; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 64; i < 80; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 80; i < 96; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 96; i < 112; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 112; i < 128; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 128; i < 144; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 144; i < 160; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 160; i < 176; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 176; i < 192; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 192; i < 208; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 208; i < 224; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 224; i < 240; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 240; i < 256; ++i) {
+            System.out.print(memory_array[i] + "  ");
+        }
+        System.out.println();
     }
 }
