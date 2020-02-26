@@ -74,10 +74,8 @@ public class Tacsim
                 PP++;
                 ACC = memory_array[PP];
             } else if (memory_array[PP] == 8) {
-                PP++;
                 ACC = memory_array[PP + X];
             } else if (memory_array[PP] == 9) {
-                PP++;
                 X = ACC;
             } else if (memory_array[PP] == 10) {
                 PP++;
@@ -100,9 +98,11 @@ public class Tacsim
                     PP++;
                 }
             } else if (memory_array[PP] == 15) {
+                System.out.println("HLT");
                 PP++;
                 if(memory_array[PP] == 0)
                     break;
+                --PP;
             }
 
             if(PP >= 255){
